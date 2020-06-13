@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册用户</title>
+    <link href="/static/css/semantic.min.css" rel="stylesheet">
+    <!--    <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/semantic.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/image.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/icon.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/icon.css" rel="stylesheet">
+    -->
+    <style type="text/css">
+        #la {
+            font-family: "Microsoft YaHei UI";
+            font-weight: 400;
+        }
+        body{
+            background-image: url('/static/imgs/background.jpeg');
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui three column grid">
+    <div class="column">
+    </div>
+    <div class="column">
+      <br>
+      <div class="ui segment">
+        <div class="formexample">
+          <form class="ui form" action="/adduser/" method="post" name="form1">
+              <div class="inline  fields">
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" value="1" checked="">
+                                <label>学生</label>
+                            </div>
+                        </div>
+                  <div class="field"></div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" value="2">
+                                <label>教师</label>
+                            </div>
+                        </div>
+                    </div>
+            <div class="field">
+              <label id="la">学号</label>
+              <input name="username" type="text">
+            </div>
+
+              <div class="field">
+              <label id="la">姓名</label>
+              <input name="name" type="text">
+            </div>
+
+            <div class="field">
+              <label id="la">密码</label>
+              <input name="password" type="password">
+            </div>
+
+              <div class="field">
+              <label id="la">确认密码</label>
+              <input name="confirmPassword" type="password">
+            </div>
+
+              <div class="field">
+              <label id="la">身份证号</label>
+              <input name="id" type="text">
+            </div>
+
+              <div class="field">
+              <label id="la">籍贯</label>
+              <input name="place" type="text">
+            </div>
+
+              <div class="field">
+              <label id="la">院系/专业</label>
+              <input name="subject" type="text">
+            </div>
+
+              <div class="field">
+              <label id="la">年级</label>
+              <input name="grade" type="text">
+            </div>
+
+              <div class="inline  fields">
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="gender" value="1" checked="">
+                                <label>男</label>
+                            </div>
+                        </div>
+                  <div class="field"></div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="gender" value="2">
+                                <label>女</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+            <div class="ui primary submit button" >提交</div>
+            <div class="ui red reset button">重置</div>
+            <div class="ui error message"></div>
+              <!--还没有注册?<a href="/register/">点击注册</a>-->
+              &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              已有账号？<div class="ui secondary button" onclick="goToRegister()">点击登录</div>
+          </form>
+        </div>
+      </div>
+        <!--<form class="ui form" action="/login/" method="post" name="form2">
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              还没有注册？<div class="ui secondary submit button" id="button2" onclick="">点击注册</div>
+        </form>-->
+    </div>
+    <div class="column">
+    </div>
+  </div>
+
+<script>
+    function goToRegister() {
+        window.location.href="/";
+    }
+</script>
+
+<script src="/static/js/jquery-1.11.2.min.js"></script>
+<script src="/static/js/semantic.min.js"></script>
+<script src="/static/js/Register.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+  $('.dropdown').dropdown();
+  $('.ui.checkbox').checkbox();
+
+  $('.formexample .form')
+  .form({
+    on: 'blur',
+    fields: {
+      username: {
+        identifier  : 'username',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '用户名不能为空'
+          },
+            {
+                type:'number',
+                prompt:'用户名只能是数字'
+            },
+            {
+              type:'exactLength[10]',
+                prompt:'用户名长度不正确'
+            }
+        ]
+      },
+
+      password: {
+        identifier  : 'password',
+        rules: [
+            {
+              type: 'empty',
+              prompt: '密码不能为空'
+            },
+            {
+                type:'number',
+                prompt:'密码只能是数字'
+            },
+            {
+              type:'exactLength[6]',
+                prompt:'密码长度不正确'
+            }
+      ]
+      },
+
+        confirmPassword: {
+        identifier  : 'confirmPassword',
+        rules: [
+            {
+              type: 'match[password]',
+                prompt: '两次密码不一致'
+            }
+      ]
+      }
+
+
+
+    }
+  });
+
+})
+
+
+$('.menu .item')
+  .tab()
+;
+</script>
+</body>
+</html>

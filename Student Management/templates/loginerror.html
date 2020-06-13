@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登陆失败</title>
+    <link href="/static/css/semantic.min.css" rel="stylesheet">
+    <!--    <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/semantic.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/image.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/icon.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/icon.css" rel="stylesheet">
+    -->
+    <style type="text/css">
+        #la {
+            font-family: "Microsoft YaHei UI";
+            font-weight: 400;
+        }
+        body{
+            background-image: url('/static/imgs/background2.jpeg');
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui three column grid">
+    <div class="column">
+    </div>
+    <div class="column">
+      <br>
+      <div class="ui segment">
+              <div class="inline  fields">
+                    <p><span style="color: red; "> 登陆失败</span></p>
+                    <p> 请仔细检查用户名和密码</p>
+                    <!--点击
+                    <div class="ui blue button" onclick="goToLoginError()">
+                        此处
+                    </div>
+                    跳转到登陆界面-->
+                  <p>5秒后会跳转到登陆页面</p>
+        </div>
+    </div>
+    <div class="column">
+    </div>
+  </div>
+
+</div>
+<script>
+function goToLoginError() {
+    window.location.herf="/";
+}
+</script>
+
+<script src="/static/js/jquery-1.11.2.min.js"></script>
+<script src="/static/js/semantic.min.js"></script>
+<script src="/static/js/login.js"></script>
+
+</body>
+</html>
+
+<script language="javascript" type="text/javascript">
+// 定时跳转
+setTimeout("javascript:location.href='/'", 5000);
+</script>

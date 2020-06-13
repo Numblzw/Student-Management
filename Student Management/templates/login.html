@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <link href="static/css/semantic.min.css" rel="stylesheet">
+    <!--    <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/semantic.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/image.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/icon.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/semantic-ui/2.2.9/components/icon.css" rel="stylesheet">
+    -->
+    <style type="text/css">
+        #la {
+            font-family: "Microsoft YaHei UI";
+            font-weight: 400;
+        }
+        body{
+            background-image: url('/static/imgs/background.jpeg');
+        }
+    </style>
+</head>
+<body>
+<div style="width:100px; height:100px; background:'/static/imgs/background.jpg';"></div>
+<div class="ui three column grid">
+    <div class="column">
+    </div>
+    <div class="column">
+      <br>
+      <div class="ui segment">
+        <div class="formexample">
+          <form class="ui form" action="/login/" method="post" name="form1">
+              <div class="inline  fields">
+                  <div class="field"></div>
+                  <div class="field"></div>
+                        <div class="field">
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" value="1" checked="">
+                                <label>学生</label>
+                            </div>
+                        </div>
+                  <div class="field"></div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" value="2">
+                                <label>教师</label>
+                            </div>
+                        </div>
+                  <!--<div class="field"></div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" value="3">
+                                <label>管理</label>
+                            </div>
+                        </div>-->
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  <div class="ui green button" onclick="goToAdmin()">管理</div>
+                    </div>
+            <div class="field">
+              <label id="la">用户名</label>
+
+              <input name="username" type="text">
+
+            </div>
+
+            <div class="field">
+              <label id="la">密码</label>
+              <input name="password" type="password">
+            </div>
+
+
+            <div class="ui primary submit button">提交</div>
+            <div class="ui red reset button">重置</div>
+            <div class="ui error message"></div>
+              <!--还没有注册?<a href="/register/">点击注册</a>-->
+              &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              还没有注册？<div class="ui secondary button" onclick="goToRegister()">点击注册</div>
+          </form>
+        </div>
+      </div>
+        <!--<form class="ui form" action="/login/" method="post" name="form2">
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              还没有注册？<div class="ui secondary submit button" id="button2" onclick="">点击注册</div>
+        </form>-->
+    </div>
+    <div class="column">
+    </div>
+  </div>
+
+<script>
+    function goToRegister() {
+        console.log("用户注册")
+        window.location.href="/register/";
+    }
+    function goToAdmin() {
+        console.log('管理员登陆')
+        window.location.href="/admin/";
+    }
+</script>
+
+
+<script src="static/js/jquery-1.11.2.min.js"></script>
+<script src="static/js/semantic.min.js"></script>
+<script src="static/js/login.js"></script>
+
+
+</body>
+</html>

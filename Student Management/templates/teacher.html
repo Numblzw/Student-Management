@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>教师管理</title>
+    <link href="/static/css/semantic.min.css" rel="stylesheet">
+    <style type="text/css">
+        #la {
+            font-family: "Microsoft YaHei UI";
+            font-weight: 400;
+        }
+        body{
+            background-image: url('/static/imgs/background2.jpeg');
+        }
+    </style>
+</head>
+<body>
+<div class="ui three column grid">
+    <div class="column">
+    </div>
+    <div class="ui column">
+        <div class="ui pointing secondary menu">
+
+             <a class="item active" data-tab="first">教师信息</a>
+            <a class="item " data-tab="second">提交成绩</a>
+            <a class="item " data-tab="third">汇总</a>
+            <a class="item right" data-tab="forth">修改成绩</a>
+        </div>
+        <div class="ui tab segment active" data-tab="first">
+            <p>工号 &#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288 {{ teacher.t_number }}</p>
+            <p>姓名&#8194&#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288 {{ teacher.t_name }}</p>
+            <p>所授课程 &#12288&#12288&#12288&#12288&#12288&#12288&#12288 {{ teacher.t_lesson_name }}</p>
+            <p>所授课程编号 &#12288&#12288&#12288&#12288&#12288 {{ teacher.t_lesson_id }}</p>
+            <div class="ui red button" onclick="logout()">
+                退出登录</div>
+        </div>
+        <div class="ui tab segment " data-tab="second">
+
+                <table class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th><label id="la">学号</label></th>
+                        <th><label id="la">姓名</label></th>
+                        <th><label id="la">成绩</label></th>
+                        <th><label id="la">修改</label></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in score %}
+                        <tr>
+                            {% if s.score <= 0 or s.score > 100 %}
+                            <td>{{ s.sNum }}</td>
+                            <td>{{ s.sName }}</td>
+                             <form class="ui form" method="POST" action="/change/?lid={{teacher.t_lesson_id}}&sid={{s.id}}">
+                            <td><input type="text" name="score" style="width:70px;"></td>
+                            <td>
+                                <input type="submit" style="float:right;" class="ui tiny button " value="确定">
+                            </td>
+                             </form>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+        </div>
+        <div class="ui tab segment " data-tab="third">
+            <p>学号&#12288&#12288&#12288&#12288&#12288&#12288&#12288
+                姓名&#12288&#12288&#12288&#12288&#12288&#12288
+                成绩&#12288&#12288&#12288&#12288&#12288&#12288备注
+                </p>
+            {% for s in score %}
+                {% if s.score <= 0 or s.score > 100 %}
+                    <p>{{ s.sNum }}&#12288&#12288&#12288
+                        {% if s.sName|length == 2 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 3 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 4 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        &nbsp&nbsp
+                        {% if s.score < 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score < 100 and s.score >= 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score == 100 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.score < 0 or s.score > 100 %}
+                            <span style="color: red; ">Error</span>&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                        <span style="color: red; ">未提交</span></p>
+
+                {% else %}
+                    <p>{{ s.sNum }}&#12288&#12288&#12288
+                        {% if s.sName|length == 2 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 3 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 4 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        &nbsp&nbsp
+                        {% if s.score < 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score < 100 and s.score >= 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score == 100 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.score < 0 or s.score > 100 %}
+                            <span style="color: red; ">Error</span>&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                         已提交</p>
+                {% endif %}
+            {% endfor %}
+            <!--<form class="ui form" action="/export/csv/?lid={{teacher.t_lesson_id}}" method="post"></form>-->
+            <div class="ui submit button" onclick="getScore()"> 导出成绩
+            </div>
+
+        </div>
+
+        <div class="ui tab segment " data-tab="forth">
+            <p>学号&#12288&#12288&#12288&#12288&#12288&#12288&#12288
+                姓名&#12288&#12288&#12288&#12288&#12288&#12288
+                成绩&#12288&#12288&#12288&#12288&#12288&#12288备注
+                </p>
+            {% for s in score %}
+                {% if s.score <= 0 or s.score > 100 %}
+                    <p>{{ s.sNum }}&#12288&#12288&#12288
+                        {% if s.sName|length == 2 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 3 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 4 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        &nbsp&nbsp
+                        {% if s.score < 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score < 100 and s.score >= 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score == 100 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.score < 0 or s.score > 100 %}
+                            <span style="color: red; ">Error</span>&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                        <span style="color: red; ">未提交</span></p>
+
+                {% else %}
+                    <p>{{ s.sNum }}&#12288&#12288&#12288
+                        {% if s.sName|length == 2 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 3 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.sName|length == 4 %}
+                            {{ s.sName }}&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        &nbsp&nbsp
+                        {% if s.score < 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score < 100 and s.score >= 10 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                        {% if s.score == 100 %}
+                            {{ s.score }}&#12288&#12288&#12288&#12288&#12288
+                        {% endif%}
+                        {% if s.score < 0 or s.score > 100 %}
+                            <span style="color: red; ">Error</span>&#12288&#12288&#12288&#12288&nbsp&nbsp
+                        {% endif%}
+                         已提交</p>
+                {% endif %}
+            {% endfor %}
+
+            <table class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th><label id="la">学号</label></th>
+                        <th><label id="la">姓名</label></th>
+                        <th><label id="la">成绩</label></th>
+                        <th><label id="la">修改</label></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in score %}
+                        <tr>
+                            <td>{{ s.sNum }}</td>
+                            <td>{{ s.sName }}</td>
+                             <form class="ui form" method="POST" action="/change/?lid={{teacher.t_lesson_id}}&sid={{s.id}}">
+                            <td><input type="text" name="score" style="width:70px;"></td>
+                            <td>
+                                <input type="submit" style="float:right;" class="ui tiny button " value="确定">
+                            </td>
+                             </form>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <!--
+<div class="ui red button" onclick="logout()">
+        退出登录
+    </div>-->
+    </div>
+
+    <div class="column">
+    </div>
+
+</div>
+
+<script>
+    function  getScore() {
+        window.location.href="/export/csv/?lid={{teacher.t_lesson_id}}";
+    }
+    function logout() {
+        window.location.href="/"
+    }
+</script>
+
+<!--
+<script>
+    $(document).ready(function(){
+
+  $('.dropdown').dropdown();
+  $('.ui.checkbox').checkbox();
+
+  $('.formexample .form')
+  .form({
+    on: 'blur',
+    fields: {
+
+        score:{
+            identifier :'text',
+            rules: [
+          {
+            type:'number',
+              prompt:'分数只能是数字'
+          }
+            ]
+        }
+      }
+  });
+
+})
+
+
+$('.menu .item')
+  .tab()
+;
+</script>
+-->
+
+
+<script src="/static/js/jquery-1.11.2.min.js"></script>
+<script src="/static/js/semantic.min.js"></script>
+<script src="/static/js/login.js"></script>
+</body>
+</html>
